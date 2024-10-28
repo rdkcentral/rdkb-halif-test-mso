@@ -38,8 +38,6 @@
 #include <math.h>
 #include <cjson/cJSON.h>
 #include "mso_mgmt_hal.h"
-#include <ut_kvp.h>
-#include <ut_kvp_profile.h>
 #include <time.h>
 
 #define MAX_SIZE 256
@@ -397,16 +395,43 @@ int test_mso_hal_l1_register(void)
     Good_Pass = (char *)malloc(MAX_SIZE * sizeof(char));
     Unique_Pass = (char *)malloc(MAX_SIZE * sizeof(char));
     Expired_Pass = (char *)malloc(MAX_SIZE * sizeof(char));
-    
-    printf("Fetching passwords from YAML file...\n");
 
-    // Fetch the password values from the YAML file using UT_KVP_PROFILE_GET_STRING
-    
-    UT_KVP_PROFILE_GET_STRING("mso/password/Invalid_Password", Invalid_Pass);
-    UT_KVP_PROFILE_GET_STRING("mso/password/Good_Password", Good_Pass);
-    UT_KVP_PROFILE_GET_STRING("mso/password/Unique_Password", Unique_Pass);
-    UT_KVP_PROFILE_GET_STRING("mso/password/Expired_Password", Expired_Pass);
-    
+    if (!Invalid_Pass || !Good_Pass || !Unique_Pass || !Expired_Pass) {
+        fprintf(stderr, "Memory allocation failed\n");
+        return 1;
+    }
+
+    printf("Enter the Invalid password: ");
+    if (fgets(Invalid_Pass, MAX_SIZE, stdin) != NULL) {
+        size_t len = strlen(Invalid_Pass);
+        if (len > 0 && Invalid_Pass[len - 1] == '\n') {
+            Invalid_Pass[len - 1] = '\0';
+        }
+    }
+
+    printf("Enter the Good password: ");
+    if (fgets(Good_Pass, MAX_SIZE, stdin) != NULL) {
+        size_t len = strlen(Good_Pass);
+        if (len > 0 && Good_Pass[len - 1] == '\n') {
+            Good_Pass[len - 1] = '\0';
+        }
+    }
+
+    printf("Enter the Unique password: ");
+    if (fgets(Unique_Pass, MAX_SIZE, stdin) != NULL) {
+        size_t len = strlen(Unique_Pass);
+        if (len > 0 && Unique_Pass[len - 1] == '\n') {
+            Unique_Pass[len - 1] = '\0';
+        }
+    }
+
+    printf("Enter the Expired password: ");
+    if (fgets(Expired_Pass, MAX_SIZE, stdin) != NULL) {
+        size_t len = strlen(Expired_Pass);
+        if (len > 0 && Expired_Pass[len - 1] == '\n') {
+            Expired_Pass[len - 1] = '\0';
+        }
+    }
 
     // Debug prints to verify values are fetched correctly
 
