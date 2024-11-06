@@ -23,3 +23,4 @@ This repository contains the Unit Test Suites (L1) for MSO `HAL`.
 |1|`HAL` Specification Document|This document provides specific information on the APIs for which tests are written in this module|[MsoMgmtHalSpec.md](https://github.com/rdkcentral/rdkb-halif-mso/blob/main/docs/pages/MsoMgmtHalSpec.md)|
 |2|`L1` Tests | `L1` Test Case File for this module |[test_mso_mgmt_hal.c](https://github.com/rdkcentral/rdkb-halif-test-mso/blob/feature/gh1_initial_test_suite/src/test_mso_mgmt_hal.c)|
 
+
